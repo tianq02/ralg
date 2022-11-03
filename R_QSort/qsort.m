@@ -14,27 +14,28 @@
 ## along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {} {@var{retval} =} qsPlot (@var{input1}, @var{input2})
+## @deftypefn {} {@var{retval} =} qsort (@var{input1}, @var{input2})
 ##
 ## @seealso{}
 ## @end deftypefn
 
 ## Author: tianq <tianq@LAPTOP-EKNTOFTJ>
-## Created: 2022-11-02
+## Created: 2022-11-03
 
-function retval = qsPlot(xL, xR)
-  i=1;
-  x=(xL:xR)
-  resA = zeros(1,((xR)-(xL)+1));
-  resB = zeros(1,((xR)-(xL)+1));
-  while((xL)<=(xR))
-    res(1,i) = ((xR)-(xL)+1);
-    A = randi((xL),1,(xL));
-    tic;qsort(A,0);t=toc;resA(i)=t;
-    tic;qsort(A,1);t=toc;resB(i)=t;
-    i++,xL++;
-  endwhile
-  plot(x,resA,x,resB),
-  legend('std', 'rand');
+%%自制（慢速）排序
 
+function rA = qsort (A, isRand=1)
+  l=1; r=columns(A);
+  rA = _qsort (A, l, r, isRand);
+endfunction
+
+function rA = _qsort (A, l, r, isRand=1)
+
+  if l<r %否则已完成，
+    %%划分，获取划分完成的，保存至A
+    [A,pl,pr] = part(A,l,r,isRand);
+    A=_qsort (A, l, pl-1, isRand);
+    A=_qsort (A, pr+1, r, isRand);
+  endif
+  rA = A;
 endfunction
