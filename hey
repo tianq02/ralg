@@ -1,0 +1,16 @@
+#include <YourLife>
+
+vaule main(){
+  Life x;
+  while(){
+    x.age=10;
+    x.iq=50;
+    x.body=TYPE.NORMAL(1);
+    x.fmaily=TYPE.DISCONNECT(2);
+    if(x.cost>100){
+    return x.vaule;
+    }else{
+    x.random
+    }
+  }
+}
